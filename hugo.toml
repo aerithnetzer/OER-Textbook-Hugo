@@ -25,14 +25,10 @@ enableGitInfo = true
 [menu]
 # [[menu.before]]
 [[menu.after]]
-  name = "Github"
-  url = "https://github.com/alex-shpak/hugo-book"
+  name = "About the Authors"
+  url = "https://www.library.northwestern.edu/research/scholarly/"
   weight = 10
 
-[[menu.after]]
-  name = "Hugo Themes"
-  url = "https://themes.gohugo.io/hugo-book/"
-  weight = 20
 
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.

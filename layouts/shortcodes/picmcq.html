@@ -1,0 +1,116 @@
+<form>
+    <p>{{ .Get "question" }}</p>
+    <div class="options-container">
+        {{ $options := split (.Get "options") "|" }}
+        {{ range $options }}
+            <div>
+                <input type="radio" id="{{ . }}" name="mcq" value="{{ . }}">
+                <label for="{{ . }}">
+                    {{ if hasPrefix . "/img/" }}
+                        <img class="option-image" src="{{ . }}" alt="Option image" onclick="selectImage(this)">
+                    {{ else }}
+                        {{ . }}
+                    {{ end }}
+                </label>
+            </div>
+        {{ end }}
+    </div>
+    <input type="hidden" name="correct_answer" value="{{ .Get "correct_answer" }}">
+    <input type="submit" value="Submit">
+</form>
+
+<div id="answer"></div>
+
+<script>
+    function selectImage(image) {
+        const selectedOption = document.querySelector('input[name="mcq"]:checked');
+        const selectedImages = document.querySelectorAll('.option-image.selected-image');
+        
+        if (selectedOption) {
+            selectedOption.checked = false;
+        }
+        
+        selectedImages.forEach((img) => {
+            img.classList.remove('selected-image');
+        });
+        
+        image.classList.add('selected-image');
+    }
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const selectedOption = document.querySelector('input[name="mcq"]:checked');
+        const correctAnswer = document.querySelector('input[name="correct_answer"]').value;
+        const answerDiv = document.getElementById('answer');
+        if (selectedOption && selectedOption.value === correctAnswer) {
+            answerDiv.textContent = 'Correct answer!';
+        } else {
+            answerDiv.textContent = 'Incorrect answer!';
+        }
+    });
+</script>
+
+<style>
+    .rihide {
+        display: none;
+        outline: none;
+        opacity: ;
+    }
+
+    .riactivity img {
+        cursor: pointer;
+        width: 100%;
+        opacity: 0;
+    }
+
+    .ricorrect {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        width: 100%;
+        opacity: 0;
+    }
+
+    .riincorrect {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        width: 100%;
+    }
+
+    .riitem {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        color: #111;
+        background-color: #efefef;
+        border-color: #dfdfdf;
+        width: 100%;
+        opacity: 0;
+    }
+
+    .option-image {
+        width: 200px; /* Set the desired width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .selected-image {
+        border: 2px solid blue;
+    }
+
+    .radio {
+        display: none;
+    }
+</style>

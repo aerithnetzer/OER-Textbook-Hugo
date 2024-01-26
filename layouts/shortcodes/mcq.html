@@ -1,0 +1,48 @@
+<style>
+  .options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  .correct-answer {
+    color: limegreen;
+  }
+  .incorrect-answer {
+    color: red;
+  }
+</style>
+
+<form>
+  <p>{{ .Get "question" }}</p>
+  <div class="options-container">
+    {{ $options := split (.Get "options") "|" }}
+    {{ range $options }}
+      <div>
+        <input type="radio" id="{{ . }}" name="mcq" value="{{ . }}">
+        <label for="{{ . }}">{{ . }}</label>
+      </div>
+    {{ end }}
+  </div>
+  <input type="hidden" name="correct_answer" value="{{ .Get "correct_answer" }}">
+  <input type="submit" value="Submit">
+</form>
+<br />
+<div id="answer"></div>
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const selectedOption = document.querySelector('input[name="mcq"]:checked');
+    const correctAnswer = document.querySelector('input[name="correct_answer"]').value;
+    const answerDiv = document.getElementById('answer');
+    if (selectedOption && selectedOption.value === correctAnswer) {
+      answerDiv.textContent = 'Correct answer!';
+      answerDiv.classList.add('correct-answer');
+      answerDiv.classList.remove('incorrect-answer');
+    } else {
+      answerDiv.textContent = 'Incorrect answer!';
+      answerDiv.classList.remove('correct-answer');
+      answerDiv.classList.add('incorrect-answer');
+    }
+  });
+</script>
