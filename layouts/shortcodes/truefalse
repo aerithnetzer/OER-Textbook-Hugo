@@ -1,48 +1,35 @@
-<style>
-  .options-container {
-    display: grid;
-    grid-template-columns: (2, 1);
-    grid gap: 10px;
-  }
-  .correct answer {
-    color: limegreen;
-  }
-  .incorrect answer {
-    color: red;
-  }
-</style>
-
-<form>
-  <p>{{ .Get "question" }} </p>
-  <div class="options-container">
-      {{ $options := split ("True", "False") "|" }}
-      {{ range $options }}
-      <div>
-        <input type="radio" id="{{ . }}" name="tf" value="{{ . }}">
-        <label for="{{ . }}">{{ . }}</label>
-      </div>
-    {{ end }}
-  </div>
-  <input type="hidden" name="correct_answer" value="{{ .Get "correct_answer" }}">
-  <input type="submit" value="Submit">
-</form>
-<br />
-<div id="answer"></div>
+<html>
+<h3 id="q"></h3>
+<table>
+  <tr>
+    <th id="t" onclick="truefunction()">True</th>
+    <th id="f" onclick="falsefunction()">False</th>
+  </tr>
+</table>
+</html>
 
 <script>
-  document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const selectedOption = document.querySelector('input[name="tf"]:checked');
-    const correctAnswer = document.querySelector('input[name="correct_answer"]').value;
-    const answerDiv = document.getElementById('answer');
-    if (selectedOption && selectedOption.value === correctAnswer) {
-      answerDiv.textContent = 'Correct answer!';
-      answerDiv.classList.add('correct-answer');
-      answerDiv.classList.remove('incorrect-answer');
-    } else {
-      answerDiv.textContent = 'Incorrect answer!';
-      answerDiv.classList.remove('correct-answer');
-      answerDiv.classList.add('incorrect-answer');
-    }
-  });
+var a = true;
+var b = document.getElementById("t").innerHTML;
+var c = document.getElementById("f").innerHTML;
+function truefunction(a) {
+  if (a = true) {
+    b.style.backgroundColor = #38d66f;
+    c.style.backgroundColor = #e03c2d;
+  }
+  else {
+    b.style.backgroundColor = #e03c2d;
+    c.style.backgroundColor = #38d66f;
+  }
+}
+function falsefunction(a) {
+  if (a = false) {
+    b.style.backgroundColor = #38d66f;
+    c.style.backgroundColor = #e03c2d;
+  }
+  else {
+    b.style.backgroundColor = #e03c2d;
+    c.style.backgroundColor = #38d66f;
+  }
+}
 </script>
