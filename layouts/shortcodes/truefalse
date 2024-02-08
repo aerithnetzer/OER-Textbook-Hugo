@@ -1,35 +1,57 @@
+<style>
+h3 {
+  padding-left: 50px;
+  padding-top: 50px;
+}
+table {
+  padding-left: 50px;
+  padding-top: 20px;
+  width: 50%;
+  td {
+    padding: 20px;
+    text-align: center;
+  }
+}
+</style>
 <html>
-<h3 id="q"></h3>
+<h3 id="question">Question</h3>
 <table>
   <tr>
-    <th id="t" onclick="truefunction()">True</th>
-    <th id="f" onclick="falsefunction()">False</th>
+    <td id="true" onClick="TrueClick(a)">True</td>
+    <td id="false" onClick="FalseClick(a)">False</td>
   </tr>
 </table>
 </html>
-
 <script>
+/* Replace "question" with the question */
+var question = "question";
+document.getElementById("question").innerHTML = question;
+var t = document.getElementById("true");
+var f = document.getElementById("false");
+t.style.backgroundColor = '#d4fcd9';
+f.style.backgroundColor = '#d4fcd9';
+
+/* Replace true with a way to get the correct boolean */
 var a = true;
-var b = document.getElementById("t").innerHTML;
-var c = document.getElementById("f").innerHTML;
-function truefunction(a) {
+function TrueClick(a) {
   if (a = true) {
-    b.style.backgroundColor = #38d66f;
-    c.style.backgroundColor = #e03c2d;
+    t.style.backgroundColor = 'green';
+    f.style.backgroundColor = 'red';
   }
   else {
-    b.style.backgroundColor = #e03c2d;
-    c.style.backgroundColor = #38d66f;
+    t.style.backgroundColor = 'red';
+    f.style.backgroundColor = 'green';
   }
 }
-function falsefunction(a) {
+
+function FalseClick(a) {
   if (a = false) {
-    b.style.backgroundColor = #38d66f;
-    c.style.backgroundColor = #e03c2d;
+    t.style.backgroundColor = 'green';
+    f.style.backgroundColor = 'red';
   }
   else {
-    b.style.backgroundColor = #e03c2d;
-    c.style.backgroundColor = #38d66f;
+    t.style.backgroundColor = 'red';
+    f.style.backgroundColor = 'green';
   }
 }
 </script>
