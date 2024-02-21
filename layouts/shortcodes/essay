@@ -1,57 +1,51 @@
-<style>
-h3 {
-  padding-left: 50px;
-  padding-top: 50px;
-}
-table {
-  padding-left: 50px;
-  padding-top: 20px;
-  width: 50%;
-  td {
-    padding: 20px;
-    text-align: center;
+// BEGIN: JavaScript code
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('Enter a paragraph: ', (paragraph) => {
+  if (paragraph.includes('hello')) {
+    console.log('Nice job!');
+  } else {
+    console.log('Missing the word hello. Please try again.');
   }
-}
-</style>
+
+  rl.close();
+});
+// BEGIN: HTML code
+<!DOCTYPE html>
 <html>
-<h3 id="question">Question</h3>
-<table>
-  <tr>
-    <td id="true" onClick="TrueClick(a)">True</td>
-    <td id="false" onClick="FalseClick(a)">False</td>
-  </tr>
-</table>
+<head>
+  <title>Hello World Search</title>
+</head>
+<body>
+  <script>
+    // FILEPATH: /C:/Users/ashal/essayquestion.js
+    // BEGIN: JavaScript code
+    const paragraphInput = document.createElement('input');
+    paragraphInput.type = 'text';
+    paragraphInput.placeholder = 'Enter a paragraph';
+    document.body.appendChild(paragraphInput);
+
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Submit';
+    document.body.appendChild(submitButton);
+
+    submitButton.addEventListener('click', () => {
+      const paragraph = paragraphInput.value;
+
+      if (paragraph.includes('hello')) {
+        console.log('Nice job!');
+      } else {
+        console.log('Missing the word hello. Please try again.');
+      }
+    });
+    // END: JavaScript code
+  </script>
+</body>
 </html>
-<script>
-/* Replace "question" with the question */
-var question = "question";
-document.getElementById("question").innerHTML = question;
-var t = document.getElementById("true");
-var f = document.getElementById("false");
-t.style.backgroundColor = '#d4fcd9';
-f.style.backgroundColor = '#d4fcd9';
-
-/* Replace true with a way to get the correct boolean */
-var a = true;
-function TrueClick(a) {
-  if (a = true) {
-    t.style.backgroundColor = 'green';
-    f.style.backgroundColor = 'red';
-  }
-  else {
-    t.style.backgroundColor = 'red';
-    f.style.backgroundColor = 'green';
-  }
-}
-
-function FalseClick(a) {
-  if (a = false) {
-    t.style.backgroundColor = 'green';
-    f.style.backgroundColor = 'red';
-  }
-  else {
-    t.style.backgroundColor = 'red';
-    f.style.backgroundColor = 'green';
-  }
-}
-</script>
+// END: HTML code
+// END: JavaScript code
