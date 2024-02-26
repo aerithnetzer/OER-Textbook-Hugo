@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h2 {
+            font-size: 24px;
+        }
+        
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>{{.get "Question"}}</h2>
+    <p>Which of the following are correct answers? (Select all that apply)</p>
+    
+    <input type="checkbox" id="option1">
+    <label for="option1">{{.get "a1"}}</label><br>
+    
+    <input type="checkbox" id="option2">
+    <label for="option2">{{.get "a2"}}</label><br>
+    
+    <input type="checkbox" id="option3">
+    <label for="option3">{{.get "a3"}}</label><br>
+    
+    <input type="checkbox" id="option4">
+    <label for="option4">{{.get "a4"}}</label><br>
+    
+    <button onclick="submitAnswers()">Submit</button>
+    
+    <script>
+        function submitAnswers() {
+            var selectedOptions = [];
+            
+            if (document.getElementById("option1").checked) {
+                selectedOptions.push("Option 1");
+            }
+            
+            if (document.getElementById("option2").checked) {
+                selectedOptions.push("Option 2");
+            }
+            
+            if (document.getElementById("option3").checked) {
+                selectedOptions.push("Option 3");
+            }
+            
+            if (document.getElementById("option4").checked) {
+                selectedOptions.push("Option 4");
+            }
+            
+            // Check if the selected options are correct
+            var correctOptions = {{split (.get "correctOptions"), "|"}}
+            var isCorrect = true;
+            
+            for (var i = 0; i < correctOptions.length; i++) {
+                if (!selectedOptions.includes(correctOptions[i])) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+            
+            // Display the result
+            var resultText = isCorrect ? "Correct!" : "Incorrect!";
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+    
+    <p id="result"></p>
+</body>
+</html>
