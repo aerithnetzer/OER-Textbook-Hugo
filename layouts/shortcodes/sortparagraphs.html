@@ -36,19 +36,18 @@
     </style>
 </head>
 <body>
+    {$list = split (.get "list"), "|"}
     <div class="container">
-        <div class="block"> {{.get "Step3"}} </div>
-        <div class="block"> {{.get "Step1" }} </div>
-        <div class="block"> {{.get "Step4" }} </div>
-        <div class="block"> {{.get "Step2" }} </div>
-        <div class="block"> {{.get "Step5" }} </div>
+        {foreach $list as $item}
+        <div class="block"> {$item} </div>
+        {/foreach}
     </div>
     <button class="submit-btn" onclick="submitOrder()">Submit</button>
 
     <script>
         function submitOrder() {
             var blocks = document.querySelectorAll('.block');
-            var correctOrder = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+            var correctOrder = {{split (.get "steps"), "|"}};
 
             for (var i = 0; i < blocks.length; i++) {
                 if (blocks[i].textContent === correctOrder[i]) {
