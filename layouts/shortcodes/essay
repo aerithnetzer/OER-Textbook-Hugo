@@ -1,51 +1,58 @@
-// BEGIN: JavaScript code
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-rl.question('Enter a paragraph: ', (paragraph) => {
-  if (paragraph.includes('hello')) {
-    console.log('Nice job!');
-  } else {
-    console.log('Missing the word hello. Please try again.');
-  }
-
-  rl.close();
-});
-// BEGIN: HTML code
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello World Search</title>
+    <style>
+        h2 {
+            font-size: 24px;
+        }
+        
+        input[type="text"] {
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        
+        .missing-words {
+            color: red;
+        }
+        
+        .bold-keyword {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <script>
-    // FILEPATH: /C:/Users/ashal/essayquestion.js
-    // BEGIN: JavaScript code
-    const paragraphInput = document.createElement('input');
-    paragraphInput.type = 'text';
-    paragraphInput.placeholder = 'Enter a paragraph';
-    document.body.appendChild(paragraphInput);
+    <h2>{{ .Get "question" }}</h2>
+    <input type="text" id="textInput">
+    <button onclick="submitText()">Submit</button>
+    <p id="result"></p>
 
-    const submitButton = document.createElement('button');
-    submitButton.textContent = 'Submit';
-    document.body.appendChild(submitButton);
+    <script>
+        function submitText() {
+            var textInput = document.getElementById("textInput").value;
+            var keywords = {{ split (.Get "keywords") "|" }};
+            var missingKeywords = [];
 
-    submitButton.addEventListener('click', () => {
-      const paragraph = paragraphInput.value;
+            for (var i = 0; i < keywords.length; i++) {
+                if (textInput.includes(keywords[i])) {
+                    textInput = textInput.replace(new RegExp(keywords[i], "g"), '<span class="bold-keyword">' + keywords[i] + '</span>');
+                } else {
+                    missingKeywords.push(keywords[i]);
+                }
+            }
 
-      if (paragraph.includes('hello')) {
-        console.log('Nice job!');
-      } else {
-        console.log('Missing the word hello. Please try again.');
-      }
-    });
-    // END: JavaScript code
-  </script>
+            document.getElementById("result").innerHTML = textInput;
+
+            if (missingKeywords.length > 0) {
+                var missingWordsText = "You're missing these words: " + missingKeywords.join(", ");
+                document.getElementById("result").insertAdjacentHTML('afterend', '<p class="missing-words">' + missingWordsText + '</p>');
+            }
+        }
+    </script>
 </body>
 </html>
-// END: HTML code
-// END: JavaScript code
