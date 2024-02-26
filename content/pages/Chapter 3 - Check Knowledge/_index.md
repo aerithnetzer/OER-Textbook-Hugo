@@ -39,3 +39,7 @@ This is a test of questions embedded in the book.
 
 ## Question 8 - Highlight words
 {{ < highlightwords paragraph = "This is a paragraf with some mispeled words. Hilite the ones that are misspelled." incorrectWords = "paragraf"|"mispeled"|"Hilite" > }}
+
+## Question 9 - Multiple Choice with multiple correct answers
+
+{{ <mcq2 Question = "Which of these cities are in the US?" a1 = "Dallas" a2 = "London" a3 = "Madrid" a4 = "Seattle" correctOptions = "Dallas"|"Seattle" > }}
