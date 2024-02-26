@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .word-list {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+        
+        .word {
+            margin-bottom: 10px;
+        }
+        
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .word-bank .word {
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: move;
+        }
+        
+        .drop-box {
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+        
+        .correct {
+            background-color: #c3e6cb;
+        }
+        
+        .incorrect {
+            background-color: #f8d7da;
+        }
+        
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="word-list">
+            <div class="word">
+                <span>{{.get "q1}} </span>
+                <div class="drop-box" id="drop-box-1"></div>
+            </div>
+            <div class="word">
+                <span>{{.get "q2"}}</span>
+                <div class="drop-box" id="drop-box-2"></div>
+            </div>
+            <div class="word">
+                <span>{{.get "q3"}}</span>
+                <div class="drop-box" id="drop-box-3"></div>
+            </div>
+            <div class="word">
+                <span>{{.get "q4"}}</span>
+                <div class="drop-box" id="drop-box-4"></div>
+            </div>
+            <div class="word">
+                <span>{{.get "q5"</span>
+                <div class="drop-box" id="drop-box-5"></div>
+            </div>
+            <div class="word">
+                <span>{{.get "q6"}}</span>
+                <div class="drop-box" id="drop-box-6"></div>
+            </div>
+        </div>
+        <div class="word-bank">
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a1"}}</div>
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a2"}}</div>
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a3"}}</div>
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a4"}}</div>
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a5"}}</div>
+            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a6"}}</div>
+        </div>
+    </div>
+    <button class="submit-button" onclick="submit()">Submit</button>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+        
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+        
+        function submit() {
+            var dropBoxes = document.getElementsByClassName("drop-box");
+            var wordBankWords = document.getElementsByClassName("word");
+            
+            for (var i = 0; i < dropBoxes.length; i++) {
+                var dropBox = dropBoxes[i];
+                var word = dropBox.textContent.trim();
+                var wordBankWord = wordBankWords[i];
+                
+                if (dropBox.id === "drop-box-1" && word === "a1") {
+                    dropBox.classList.add("correct");
+                } else if (dropBox.id === "drop-box-2" && word === "a2") {
+                    dropBox.classList.add("correct");
+                } else if (dropBox.id === "drop-box-3" && word === "a3") {
+                    dropBox.classList.add("correct");
+                } else if (dropBox.id === "drop-box-4" && word === "a4") {
+                    dropBox.classList.add("correct");
+                } else if (dropBox.id === "drop-box-5" && word === "a5") {
+                    dropBox.classList.add("correct");
+                } else if (dropBox.id === "drop-box-6" && word === "a6") {
+                    dropBox.classList.add("correct");
+                } else {
+                    dropBox.classList.add("incorrect");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
