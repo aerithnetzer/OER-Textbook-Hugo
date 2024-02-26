@@ -56,39 +56,20 @@
 </head>
 <body>
     <div class="container">
+        {$words = {{split (.get questions), "|"}}}
         <div class="word-list">
+            {foreach $words as $word}
             <div class="word">
-                <span>{{.get "q1}} </span>
-                <div class="drop-box" id="drop-box-1"></div>
+                <span>$word</span>
+                <div class="drop-box" id="d" + $word></div>
             </div>
-            <div class="word">
-                <span>{{.get "q2"}}</span>
-                <div class="drop-box" id="drop-box-2"></div>
-            </div>
-            <div class="word">
-                <span>{{.get "q3"}}</span>
-                <div class="drop-box" id="drop-box-3"></div>
-            </div>
-            <div class="word">
-                <span>{{.get "q4"}}</span>
-                <div class="drop-box" id="drop-box-4"></div>
-            </div>
-            <div class="word">
-                <span>{{.get "q5"</span>
-                <div class="drop-box" id="drop-box-5"></div>
-            </div>
-            <div class="word">
-                <span>{{.get "q6"}}</span>
-                <div class="drop-box" id="drop-box-6"></div>
-            </div>
+            {/foreach}
         </div>
         <div class="word-bank">
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a1"}}</div>
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a2"}}</div>
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a3"}}</div>
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a4"}}</div>
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a5"}}</div>
-            <div class="word" draggable="true" ondragstart="drag(event)">{{.get "a6"}}</div>
+            {$answers = {{split (.get answers), "|"}}}
+            {foreach $answers as $answer}
+            <div class="word" draggable="true" ondragstart="drag(event)">{{$answer}}</div>
+            {/foreach}
         </div>
     </div>
     <button class="submit-button" onclick="submit()">Submit</button>
@@ -117,17 +98,7 @@
                 var word = dropBox.textContent.trim();
                 var wordBankWord = wordBankWords[i];
                 
-                if (dropBox.id === "drop-box-1" && word === "a1") {
-                    dropBox.classList.add("correct");
-                } else if (dropBox.id === "drop-box-2" && word === "a2") {
-                    dropBox.classList.add("correct");
-                } else if (dropBox.id === "drop-box-3" && word === "a3") {
-                    dropBox.classList.add("correct");
-                } else if (dropBox.id === "drop-box-4" && word === "a4") {
-                    dropBox.classList.add("correct");
-                } else if (dropBox.id === "drop-box-5" && word === "a5") {
-                    dropBox.classList.add("correct");
-                } else if (dropBox.id === "drop-box-6" && word === "a6") {
+                if (dropBox.id.substring(1) === word) {
                     dropBox.classList.add("correct");
                 } else {
                     dropBox.classList.add("incorrect");
