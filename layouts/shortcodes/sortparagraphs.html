@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .block {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            border: 1px solid gray;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+            cursor: move;
+        }
+        
+        .correct {
+            background-color: lightgreen;
+        }
+        
+        .incorrect {
+            background-color: red;
+        }
+        
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block"> {{.get "Step3"}} </div>
+        <div class="block"> {{.get "Step1" }} </div>
+        <div class="block"> {{.get "Step4" }} </div>
+        <div class="block"> {{.get "Step2" }} </div>
+        <div class="block"> {{.get "Step5" }} </div>
+    </div>
+    <button class="submit-btn" onclick="submitOrder()">Submit</button>
+
+    <script>
+        function submitOrder() {
+            var blocks = document.querySelectorAll('.block');
+            var correctOrder = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+
+            for (var i = 0; i < blocks.length; i++) {
+                if (blocks[i].textContent === correctOrder[i]) {
+                    blocks[i].classList.add('correct');
+                    blocks[i].classList.remove('incorrect');
+                } else {
+                    blocks[i].classList.add('incorrect');
+                    blocks[i].classList.remove('correct');
+                }
+            }
+        }
+
+        var container = document.querySelector('.container');
+        var blocks = document.querySelectorAll('.block');
+
+        blocks.forEach(block => {
+            block.addEventListener('dragstart', dragStart);
+            block.addEventListener('dragend', dragEnd);
+        });
+
+        container.addEventListener('dragover', dragOver);
+        container.addEventListener('dragenter', dragEnter);
+        container.addEventListener('dragleave', dragLeave);
+        container.addEventListener('drop', dragDrop);
+
+        function dragStart() {
+            this.classList.add('dragging');
+        }
+
+        function dragEnd() {
+            this.classList.remove('dragging');
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function dragEnter(e) {
+            e.preventDefault();
+            this.classList.add('hovered');
+        }
+
+        function dragLeave() {
+            this.classList.remove('hovered');
+        }
+
+        function dragDrop() {
+            this.classList.remove('hovered');
+            var draggingBlock = document.querySelector('.dragging');
+            this.appendChild(draggingBlock);
+        }
+    </script>
+</body>
+</html>
