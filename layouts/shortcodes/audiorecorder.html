@@ -1,0 +1,56 @@
+from IPython.display import HTML
+
+html_code = '''
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h2 {
+            font-size: 24px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2> {{.get "Question"}} </h2>
+    <button onclick="startRecording()">Start Recording</button>
+    <button onclick="stopRecording()">Stop Recording</button>
+    <button onclick="saveRecording()">Save Recording</button>
+    <audio id="audio" controls></audio>
+
+    <script>
+        var audioChunks = [];
+        var mediaRecorder;
+
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+
+                    mediaRecorder.addEventListener("dataavailable", function(event) {
+                        audioChunks.push(event.data);
+                    });
+                });
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+        }
+
+        function saveRecording() {
+            var audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+            var audioUrl = URL.createObjectURL(audioBlob);
+            var audioElement = document.getElementById("audio");
+            audioElement.src = audioUrl;
+        }
+    </script>
+</body>
+</html>
+'''
+
+HTML(html_code)
