@@ -20,4 +20,4 @@ This is a test of questions embedded in the book.
 
 ## Question 3 - Sort the Paragraphs
 
-{{<sortparagraphs Step1 = "Un" Step2 = "Deux" Step3 = "Trois" Step4 = "Quatre" Step5 = "Cinq">}}
+{{ < sortparagraphs Step1 = "Un" Step2 = "Deux" Step3 = "Trois" Step4 = "Quatre" Step5 = "Cinq" > }}
