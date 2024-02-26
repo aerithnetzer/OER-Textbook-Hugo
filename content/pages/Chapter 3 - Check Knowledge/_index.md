@@ -21,3 +21,15 @@ This is a test of questions embedded in the book.
 ## Question 3 - Sort the Paragraphs
 
 {{ < sortparagraphs Step1 = "Un" Step2 = "Deux" Step3 = "Trois" Step4 = "Quatre" Step5 = "Cinq" > }}
+
+## Question 4 - Audio Recorder
+
+{{ < audiorecorder Question = "Record your voice:" > }}
+
+## Question 5 - Freewrite
+
+{{ < freewrite Question = "Write some stuff!" > }}
+
+##Question 6 - Fill in the blanks
+
+{{ < fillinblank Paragraph = "Paris is in <input type="text" id="word1">, which is a country in <input type="text" id="word2">." words = [document.getElementById("word1").value.trim(), document.getElementById("word2").value.trim()] answers = ["France", "Europe"] useranswers = [word1, word2] > }}
