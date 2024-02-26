@@ -20,7 +20,7 @@ This is a test of questions embedded in the book.
 
 ## Question 3 - Sort the Paragraphs
 
-{{ < sortparagraphs Step1 = "Un" Step2 = "Deux" Step3 = "Trois" Step4 = "Quatre" Step5 = "Cinq" > }}
+{{ < sortparagraphs steps = "Un"|"Deux"|"Trois"|"Quatre"|"Cinq" list = "Deux"|"Quatre"|"Un"|"Cinq"|"Trois"> }}
 
 ## Question 4 - Audio Recorder
 
@@ -35,7 +35,7 @@ This is a test of questions embedded in the book.
 {{ < fillinblank Paragraph = "Paris is in <input type="text" id="word1">, which is a country in <input type="text" id="word2">." words = document.getElementById("word1").value.trim()| document.getElementById("word2").value.trim() answers = "France" | "Europe" useranswers = word1 | word2 > }}
 
 ## Question 7 - Match words
-{{ < dragdrop q1 = "Je" q2 = "Tu" q3 = "Il/Elle/On" q4 = "Nous" q5 = "Vous" q6 = "Ils/Elles" a1 = "'ai" a2 = "as" a3 = "a" a4 = "avons" a5 = "avez" a6 = "ont" > }}
+{{ < dragdrop questions = "Je"|"Tu"|"Il/Elle/On"|"Nous"|"Vous"|"Ils/Elles" answers = "'ai"|"as"|"a"|"avons"|"avez"|"ont" > }}
 
 ## Question 8 - Highlight words
 {{ < highlightwords paragraph = "This is a paragraf with some mispeled words. Hilite the ones that are misspelled." incorrectWords = "paragraf"|"mispeled"|"Hilite" > }}
