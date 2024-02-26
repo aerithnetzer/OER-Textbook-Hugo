@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h2 {
+            font-size: 24px;
+        }
+        
+        p {
+            font-size: 16px;
+        }
+        
+        .highlight {
+            background-color: yellow;
+            cursor: pointer;
+        }
+        
+        .correct {
+            background-color: green;
+        }
+        
+        .incorrect {
+            background-color: red;
+        }
+        
+        .missing {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Highlight the incorrect words</h2>
+    <p id="paragraph">
+          {{.get "Paragraph"}}
+    </p>
+    <button onclick="submitHighlights()">Submit</button>
+
+    <script>
+        function submitHighlights() {
+            var paragraph = document.getElementById("paragraph");
+            var highlightedWords = paragraph.getElementsByClassName("highlight");
+            var incorrectWords = {{split (.get "incorrectWords"), "|"}};
+
+            for (var i = 0; i < highlightedWords.length; i++) {
+                var word = highlightedWords[i].textContent.trim();
+                if (incorrectWords.includes(word)) {
+                    highlightedWords[i].classList.remove("highlight");
+                    highlightedWords[i].classList.add("incorrect");
+                } else {
+                    highlightedWords[i].classList.remove("highlight");
+                    highlightedWords[i].classList.add("correct");
+                }
+            }
+
+            var allWords = paragraph.textContent.trim().split(" ");
+            var missingWords = [];
+
+            for (var j = 0; j < allWords.length; j++) {
+                var word = allWords[j];
+                if (!highlightedWords[j]) {
+                    missingWords.push(word);
+                }
+            }
+
+            if (missingWords.length > 0) {
+                var missingWordsText = "You missed highlighting these words: " + missingWords.join(", ");
+                paragraph.insertAdjacentHTML('afterend', '<p class="missing">' + missingWordsText + '</p>');
+            }
+        }
+
+        document.getElementById("paragraph").addEventListener("click", function(event) {
+            if (event.target.classList.contains("highlight")) {
+                event.target.classList.remove("highlight");
+            } else {
+                event.target.classList.add("highlight");
+            }
+        });
+    </script>
+</body>
+</html>
