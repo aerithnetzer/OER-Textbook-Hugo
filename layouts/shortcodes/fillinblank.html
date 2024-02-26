@@ -37,10 +37,10 @@
 
     <script>
         function checkAnswers() {
-            var words = {{.get "words"}};
+            var words = {{split (.get "words"), "|"}};
             
-            var correctAnswers = {{.get "answers"}};
-            var userAnswers = {{.get "useranswers"}};
+            var correctAnswers = {{split (.get "answers"), "|"}};
+            var userAnswers = {{split (.get "useranswers"), "|"}};
             
             var result = document.getElementById("result");
             result.innerHTML = "";
