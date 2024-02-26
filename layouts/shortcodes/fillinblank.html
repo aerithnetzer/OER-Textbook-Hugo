@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h2 {
+            font-size: 24px;
+        }
+        
+        input[type="text"] {
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        
+        .correct-answer {
+            color: green;
+        }
+        
+        .incorrect-answer {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fill in the blanks!</h2>
+    <p>
+        <br>
+        {{ .get "Paragraph" }}
+    </p>
+    <button onclick="checkAnswers()">Submit</button>
+    <p id="result"></p>
+
+    <script>
+        function checkAnswers() {
+            var words = {{.get "words"}};
+            
+            var correctAnswers = {{.get "answers"}};
+            var userAnswers = {{.get "useranswers"}};
+            
+            var result = document.getElementById("result");
+            result.innerHTML = "";
+            
+            for (var i = 0; i < correctAnswers.length; i++) {
+                var span = document.createElement("span");
+                span.innerHTML = userAnswers[i];
+                
+                if (userAnswers[i] === correctAnswers[i]) {
+                    span.classList.add("correct-answer");
+                } else {
+                    span.classList.add("incorrect-answer");
+                }
+                
+                result.appendChild(span);
+                result.innerHTML += " ";
+            }
+        }
+    </script>
+</body>
+</html>
