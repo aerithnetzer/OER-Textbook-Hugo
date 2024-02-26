@@ -30,12 +30,12 @@ This is a test of questions embedded in the book.
 
 {{ < freewrite Question = "Write some stuff!" > }}
 
-##Question 6 - Fill in the blanks
+## Question 6 - Fill in the blanks
 
 {{ < fillinblank Paragraph = "Paris is in <input type="text" id="word1">, which is a country in <input type="text" id="word2">." words = document.getElementById("word1").value.trim()| document.getElementById("word2").value.trim() answers = "France" | "Europe" useranswers = word1 | word2 > }}
 
-##Question 7 - Match words
+## Question 7 - Match words
 {{ < dragdrop q1 = "Je" q2 = "Tu" q3 = "Il/Elle/On" q4 = "Nous" q5 = "Vous" q6 = "Ils/Elles" a1 = "'ai" a2 = "as" a3 = "a" a4 = "avons" a5 = "avez" a6 = "ont" > }}
 
-##Question 8 - Highlight words
+## Question 8 - Highlight words
 {{ < highlightwords paragraph = "This is a paragraf with some mispeled words. Hilite the ones that are misspelled." incorrectWords = "paragraf"|"mispeled"|"Hilite" > }}
