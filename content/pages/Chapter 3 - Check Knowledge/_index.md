@@ -35,7 +35,7 @@ This is a test of questions embedded in the book.
 {{ < fillinblank Paragraph = "Paris is in <input type="text" id="word1">, which is a country in <input type="text" id="word2">." words = document.getElementById("word1").value.trim()| document.getElementById("word2").value.trim() answers = "France" | "Europe" useranswers = word1 | word2 > }}
 
 ## Question 7 - Match words
-{{ < dragdrop questions = "Je"|"Tu"|"Il/Elle/On"|"Nous"|"Vous"|"Ils/Elles" answers = "'ai"|"as"|"a"|"avons"|"avez"|"ont" > }}
+## {{ < dragdrop questions = "Je"|"Tu"|"Il/Elle/On"|"Nous"|"Vous"|"Ils/Elles" answers = "'ai"|"as"|"a"|"avons"|"avez"|"ont" > }}
 
 ## Question 8 - Highlight words
 {{ < highlightwords paragraph = "This is a paragraf with some mispeled words. Hilite the ones that are misspelled." incorrectWords = "paragraf"|"mispeled"|"Hilite" > }}
