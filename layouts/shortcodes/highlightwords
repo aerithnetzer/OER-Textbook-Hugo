@@ -39,7 +39,7 @@
         function submitHighlights() {
             var paragraph = document.getElementById("paragraph");
             var highlightedWords = paragraph.getElementsByClassName("highlight");
-            var incorrectWords = {{split (.get "incorrectWords"), "|"}};
+            var incorrectWords = {{split (.get "incorrectWords") "|"}};
 
             for (var i = 0; i < highlightedWords.length; i++) {
                 var word = highlightedWords[i].textContent.trim();
