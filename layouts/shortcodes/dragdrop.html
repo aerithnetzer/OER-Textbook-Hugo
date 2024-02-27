@@ -56,19 +56,19 @@
 </head>
 <body>
     <div class="container">
-        {$words = {{split (.get questions), "|"}}}
+        {words = {{split (.get questions), "|"}}}
         <div class="word-list">
-            {foreach $words as $word}
+            {foreach words as word}
             <div class="word">
-                <span>$word</span>
+                <span>word</span>
                 <div class="drop-box" id="d" + $word></div>
             </div>
             {/foreach}
         </div>
         <div class="word-bank">
-            {$answers = {{split (.get answers), "|"}}}
-            {foreach $answers as $answer}
-            <div class="word" draggable="true" ondragstart="drag(event)">{{$answer}}</div>
+            {answers = {{split (.get answers), "|"}}}
+            {foreach answers as answer}
+            <div class="word" draggable="true" ondragstart="drag(event)">{{answer}}</div>
             {/foreach}
         </div>
     </div>
