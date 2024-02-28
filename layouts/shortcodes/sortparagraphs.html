@@ -47,7 +47,7 @@
     <script>
         function submitOrder() {
             var blocks = document.querySelectorAll('.block');
-            var correctOrder = {{split (.get "steps"), "|"}};
+            var correctOrder = {{split (.get "steps") "|"}};
 
             for (var i = 0; i < blocks.length; i++) {
                 if (blocks[i].textContent === correctOrder[i]) {

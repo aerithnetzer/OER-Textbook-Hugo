@@ -56,7 +56,7 @@
             }
             
             // Check if the selected options are correct
-            var correctOptions = {{split (.get "correctOptions"), "|"}}
+            var correctOptions = {{split (.get "correctOptions") "|"}}
             var isCorrect = true;
             
             for (var i = 0; i < correctOptions.length; i++) {
